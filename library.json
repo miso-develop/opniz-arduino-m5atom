@@ -1,0 +1,29 @@
+{
+  "name": "opniz-m5atom",
+  "version": "0.1.0",
+  "description": "opniz Arduino library for M5ATOM",
+  "keywords": "Opniz,ESP32,M5Stack",
+  "license": "MIT",
+  "homepage": "https://github.com/miso-develop/opniz",
+  "repository": {
+    "type" : "git",
+    "url": "https://github.com/miso-develop/opniz-arduino-m5atom.git"
+  },
+  "authors": {
+    "name": "Miso Tanaka",
+    "email": "miso.develop@gmail.com"
+  },
+  "framework": "arduino",
+  "platforms": "espressif32",
+  "dependencies": {
+    "bblanchon/ArduinoJson": "^6.17.3",
+    "links2004/WebSockets": "^2.3.6",
+    "m5stack/M5Atom": "^0.0.1",
+    "fastled/FastLED": "^3.4.0"
+  },
+  "export": {
+    "exclude": [
+      "extras"
+    ]
+  }
+}
