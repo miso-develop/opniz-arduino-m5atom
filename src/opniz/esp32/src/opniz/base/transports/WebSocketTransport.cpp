@@ -1,13 +1,15 @@
 #include "./WebSocketTransport.h"
 
-WebSocketTransport::WebSocketTransport(const char* address, const uint16_t port) : Transport(address, port) {}
+WebSocketTransport::WebSocketTransport(const char* address, const uint16_t port, const String id = "") : Transport(address, port), _id(id) {}
 
 WebSocketTransport::~WebSocketTransport() {}
 
 void WebSocketTransport::connect() {
     if (_socketIO.isConnected()) return;
     _socketIO.onEvent(_createSocketIOEvent());
-    _socketIO.begin(_address, _port, "/socket.io/?EIO=4");
+    
+    const String url = "/socket.io/?EIO=4&opnizId=" + _id;
+    _socketIO.begin(_address, _port, url);
 }
 
 void WebSocketTransport::close() {

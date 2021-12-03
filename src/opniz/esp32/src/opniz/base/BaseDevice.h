@@ -18,7 +18,7 @@ private:
     std::function<String(String)> _rpcHandlerFunction = [this](String rpcRequest) -> String { return _rpcHandler(rpcRequest); };
     
 public:
-    BaseDevice(const char* address, const uint16_t port, const Protocol protocol = WebSocket);
+    BaseDevice(const char* address, const uint16_t port, const String id, const Protocol protocol);
     virtual ~BaseDevice() = default;
     
     void handleRpc();

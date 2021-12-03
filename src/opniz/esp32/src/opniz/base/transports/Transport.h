@@ -7,7 +7,7 @@
 class Transport {
 protected:
     const char* _address;
-    uint16_t _port;
+    const uint16_t _port;
     
     std::function<String(String)> _rpcHandlerFunction;
     

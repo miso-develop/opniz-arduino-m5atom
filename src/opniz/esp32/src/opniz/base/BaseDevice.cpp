@@ -1,6 +1,6 @@
 #include "./BaseDevice.h"
 
-BaseDevice::BaseDevice(const char* address, const uint16_t port, const Protocol protocol) : BaseTransport(address, port, protocol) {
+BaseDevice::BaseDevice(const char* address, const uint16_t port, const String id, const Protocol protocol) : BaseTransport(address, port, id, protocol) {
     BaseTransport::init(_rpcHandlerFunction); // MEMO: Transport method
 }
 

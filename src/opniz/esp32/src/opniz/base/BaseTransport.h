@@ -9,7 +9,7 @@ private:
     Transport* _transport;
     
 public:
-    BaseTransport(const char* address, const uint16_t port, const Protocol protocol = WebSocket);
+    BaseTransport(const char* address, const uint16_t port, const String id, const Protocol protocol);
     virtual ~BaseTransport() = default;
     
     void init(std::function<String(String)> rpcHandlerFunction);

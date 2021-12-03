@@ -208,8 +208,19 @@ opniz Node.js SDKでは以下の通信プロトコルを実装しています。
 
 |プロトコル|コンストラクタパラメータ|パラメータ内容|
 |---|---|---|
-|WebSocket (Client)|`Opniz::M5Atom(address, port)`|`address`: 接続先のopnizのIPアドレスまたはhostnameを指定します<br>`port`: 接続先のopnizのWebSocket Serverポート番号を指定します<br>|
-|TCP (Server/Client同居)|`Opniz::M5Atom(address, port, TCP)`|`address`: 接続先のopnizのIPアドレスを指定します<br>`port`: 接続先のopnizのTCP Serverポート番号を指定します<br>`protocol`: TCPを指定します（文字列ではありません。enumを用意しています）|
+|WebSocket (Client)|`Opniz::M5Atom(address, port, id)`|`address`: 接続先のopnizのIPアドレスまたはhostnameを指定します<br>`port`: 接続先のopnizのWebSocket Serverポート番号を指定します<br>`id`: [opniz Server](https://github.com/miso-develop/opniz-server)を経由してopniz Node.js SDKと接続する場合に、opniz Node.js SDKで指定した`id`と同じ値を指定します（省略可）|
+|TCP (Server/Client同居)|`Opniz::M5Atom(address, port, protocol)`|`address`: 接続先のopnizのIPアドレスを指定します<br>`port`: 接続先のopnizのTCP Serverポート番号を指定します<br>`protocol`: Protocol::TCPを指定します（文字列ではありません。enumを用意しています）|
+
+
+
+## 関連リポジトリ
+
+* [opniz SDK for Node.js](https://github.com/miso-develop/opniz-sdk-nodejs)
+	* opnizデバイスをNode.jsから遠隔制御するためのSDK
+* [opniz Arduino Library for ESP32](https://github.com/miso-develop/opniz-arduino-esp32)
+	* ESP32向けArduinoライブラリ
+* [opniz Server](https://github.com/miso-develop/opniz-server)
+	* opniz Node.js SDKやopnizデバイスからのJSON RPCメッセージを中継するWebSocketサーバ
 
 
 

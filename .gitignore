@@ -5,8 +5,8 @@
 .vscode/ipch
 /*.log
 
-.vscode/
-temp/
-issue.md
-src/main.cpp
+# [release]
 .gitmodules
+.temp
+.vscode
+main.cpp

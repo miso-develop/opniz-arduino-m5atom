@@ -1,6 +1,22 @@
 #include "./M5Atom.h"
 
-Opniz::M5Atom::M5Atom(const char* address, uint16_t port, const Protocol protocol) : Esp32(address, port, protocol) {
+const String id = "___default___";
+const Protocol protocol = WebSocket;
+
+Opniz::M5Atom::M5Atom(const char* address, const uint16_t port) : Esp32(address, port, id, protocol) {
+    _constructor();
+}
+Opniz::M5Atom::M5Atom(const char* address, const uint16_t port, const String id) : Esp32(address, port, id, protocol) {
+    _constructor();
+}
+Opniz::M5Atom::M5Atom(const char* address, const uint16_t port, const Protocol protocol) : Esp32(address, port, id, protocol) {
+    _constructor();
+}
+Opniz::M5Atom::M5Atom(const char* address, const uint16_t port, const String id, const Protocol protocol) : Esp32(address, port, id, protocol) {
+    _constructor();
+}
+
+void Opniz::M5Atom::_constructor() {
     addHandler({
         new _getDeviceName______String_Handler,
         new _M5_begin___bool_bool_bool___void_Handler,

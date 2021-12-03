@@ -1,7 +1,7 @@
 #include "./BaseTransport.h"
 
-BaseTransport::BaseTransport(const char* address, const uint16_t port, const Protocol protocol) : Transport(address, port) {
-    _transport = TransportCreator::create(address, port, protocol);
+BaseTransport::BaseTransport(const char* address, const uint16_t port, const String id, const Protocol protocol) : Transport(address, port) {
+    _transport = TransportCreator::create(address, port, id, protocol);
 }
 
 void BaseTransport::init(std::function<String(String)> rpcHandlerFunction) {
