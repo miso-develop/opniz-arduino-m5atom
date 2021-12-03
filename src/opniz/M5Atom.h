@@ -9,8 +9,13 @@
 
 namespace Opniz { // MEMO: 本家M5Atomと名前衝突してしまったのでnamespaceで回避
     class M5Atom : public Esp32 {
+    private:
+        void _constructor();
     public:
-        M5Atom(const char* address, const uint16_t port, const Protocol protocol = WebSocket);
+        M5Atom(const char* address, const uint16_t port);
+        M5Atom(const char* address, const uint16_t port, const String id);
+        M5Atom(const char* address, const uint16_t port, const Protocol protocol);
+        M5Atom(const char* address, const uint16_t port, const String id, const Protocol protocol);
         ~M5Atom() {};
 
         class _getDeviceName______String_Handler : public BaseHandler {

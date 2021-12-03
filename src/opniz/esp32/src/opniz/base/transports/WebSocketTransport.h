@@ -18,8 +18,10 @@ private:
     SocketIOclientEvent _createSocketIOEvent();
     void _socketIOEventHandler(uint8_t *payload, size_t length);
     
+    const String _id;
+    
 public:
-    WebSocketTransport(const char* address, const uint16_t port);
+    WebSocketTransport(const char* address, const uint16_t port, const String id);
     ~WebSocketTransport();
     
     void init(std::function<String(String)> rpcHandlerFunction);

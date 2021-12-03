@@ -9,10 +9,15 @@
 
 namespace Opniz {
     class Esp32 : public BaseDevice {
+    private:
+        void _constructor();
     public:
-        Esp32(const char* address, const uint16_t port, const Protocol protocol = WebSocket);
+        Esp32(const char* address, const uint16_t port);
+        Esp32(const char* address, const uint16_t port, const String id);
+        Esp32(const char* address, const uint16_t port, const Protocol protocol);
+        Esp32(const char* address, const uint16_t port, const String id, const Protocol protocol);
         ~Esp32() {};
-
+        
         class _getDeviceName______String_Handler : public BaseHandler {
         public:
             String name() override { return "_getDeviceName():String"; };

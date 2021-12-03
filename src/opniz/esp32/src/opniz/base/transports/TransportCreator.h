@@ -15,16 +15,16 @@ public:
     TransportCreator() = delete;
     ~TransportCreator() = delete;
     
-    static Transport* create(const char* address, const uint16_t port, const Protocol protocol = WebSocket) {
+    static Transport* create(const char* address, const uint16_t port, const String id, const Protocol protocol) {
         switch (protocol) {
             case WebSocket:
-                return new WebSocketTransport(address, port);
+                return new WebSocketTransport(address, port, id);
                 break;
             case TCP:
                 return new TcpTransport(address, port);
                 break;
             default:
-                return new WebSocketTransport(address, port);
+                return new WebSocketTransport(address, port, id);
                 break;
         }
     }

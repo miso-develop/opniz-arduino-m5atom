@@ -1,6 +1,22 @@
 #include "./Esp32.h"
 
-Opniz::Esp32::Esp32(const char* address, const uint16_t port, const Protocol protocol) : BaseDevice(address, port, protocol) {
+const String id = "___default___";
+const Protocol protocol = WebSocket;
+
+Opniz::Esp32::Esp32(const char* address, const uint16_t port) : BaseDevice(address, port, id, protocol) {
+    _constructor();
+}
+Opniz::Esp32::Esp32(const char* address, const uint16_t port, const String id) : BaseDevice(address, port, id, protocol) {
+    _constructor();
+}
+Opniz::Esp32::Esp32(const char* address, const uint16_t port, const Protocol protocol) : BaseDevice(address, port, id, protocol) {
+    _constructor();
+}
+Opniz::Esp32::Esp32(const char* address, const uint16_t port, const String id, const Protocol protocol) : BaseDevice(address, port, id, protocol) {
+    _constructor();
+}
+
+void Opniz::Esp32::_constructor() {
     addHandler({
         new _getDeviceName______String_Handler,
         new GetFreeHeapHandler,
