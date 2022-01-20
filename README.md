@@ -1,13 +1,13 @@
 # opniz Arduino Library for M5ATOM
 
-![logo](./extras/images/logo.png)
+<div align="center"><img src="https://user-images.githubusercontent.com/22117028/150321839-e1e73dcb-d4b6-4bac-92b9-b1501ff3b092.png" alt="logo"></div>
 
-`❗ このプロジェクトは現在アルファ版です。`
+> ❗ このプロジェクトは現在アルファ版です。
 
 opnizとはM5StackといったESP32デバイスをNode.jsからobnizライクに遠隔制御するための、**Node.js SDK**および**Arduinoライブラリ**です。  
 しくみとしてはESP32デバイスおよびNode.js SDK間にて**JSON形式のRPCメッセージ**をやりとりし、相互に定義されたメソッドを呼び合います。  
 
-![overview](./extras/images/overview.png)
+![overview](https://user-images.githubusercontent.com/22117028/150321859-5dde911d-91da-41f4-abee-3ad696905529.png)
 
 現在Node.js SDK、Arduinoライブラリともに**ESP32**および**M5ATOM**クラスを実装しています。  
 M5ATOMクラスで**M5Stack、M5StickC、M5ATOM Lite、M5ATOM Matrixでの動作を確認しています。**  
@@ -27,19 +27,41 @@ Arduino IDEおよびPlatformIOに対応しています。
 
 ## インストール方法
 
+opniz CLIを使用する方法と、Arduinoを使用する方法があります。  
+
+### [opniz CLI](https://github.com/miso-develop/opniz-cli)でのインストール
+
+opniz CLIとはopniz Arduino LibraryのBasicスケッチをコマンドから簡単に書き込めるCLIツールです。  
+npmにリリースされているので、以下の`npm install`コマンドでインストールできます。  
+
+```sh
+npm install -g opniz-cli
+```
+
+opniz CLIインストール後に以下のコマンドを実行するとBasicスケッチをデバイスへ書き込みます。  
+デバイスのシリアルポートやWi-FiのSSID/パスワードといった情報が必要ですが、対話モードで動的に選択肢を取得し表示してくれます。  
+
+```sh
+opniz upload
+```
+
+<img src="https://user-images.githubusercontent.com/22117028/148371155-569e2ae3-7655-4c5c-a38f-4d13dd1ada4b.gif" width="640">
+
+### Arduinoでのインストール
+
 まだArduinoライブラリマネージャーにはリリースしていないため、GitHubリポジトリよりZIPをダウンロードのうえ、Arduino IDEにて「.ZIP形式のライブラリをインストール...」を選択しダウンロードしたZIPをライブラリへ追加してください。
 
 ### GitHubリポジトリからのZIPダウンロード
 
 「Code」ボタンを押すと表示されるメニューより「Download ZIP」を選択しダウンロードします。  
 
-![github-download](./extras/images/github-download.png)
+![github-download](https://user-images.githubusercontent.com/22117028/150333710-67249a99-37c0-42b6-8efb-a320ec6147e5.png)
 
 ### Arduino IDEでの.ZIP形式ライブラリのインストール
 
 Arduinoのメニューより「スケッチ」→「ライブラリをインクルード」→「.ZIP形式のライブラリをインストール...」と選択し、ダウンロードしたZIPを選択します。  
 
-![arduino-library-include](./extras/images/arduino-library-include.png)
+![arduino-library-include](https://user-images.githubusercontent.com/22117028/150333713-5757f724-0590-4cc6-ad15-9e51a94f6cb5.png)
 
 ### 依存ライブラリのインストール
 
@@ -219,6 +241,8 @@ opniz Node.js SDKでは以下の通信プロトコルを実装しています。
 	* opnizデバイスをNode.jsから遠隔制御するためのSDK
 * [opniz Arduino Library for ESP32](https://github.com/miso-develop/opniz-arduino-esp32)
 	* ESP32向けArduinoライブラリ
+* [opniz CLI](https://github.com/miso-develop/opniz-cli)
+	* opniz Arduino LibraryのBasicスケッチをコマンドから簡単に書き込めるCLIツール
 * [opniz Server](https://github.com/miso-develop/opniz-server)
 	* opniz Node.js SDKやopnizデバイスからのJSON RPCメッセージを中継するWebSocketサーバ
 
