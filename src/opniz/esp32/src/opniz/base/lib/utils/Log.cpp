@@ -1,12 +1,5 @@
 #include "./log.h"
 
-void log(String v) { Serial.println(v.c_str()); }
-void log(char* v) { Serial.println(v); }
-void log(int v) { Serial.println(v); }
-void log(float v) { Serial.println(v); }
-void log(uint32_t v) { Serial.println(v); }
-void log(boolean v) { Serial.println(v ? "true" : "false"); }
-
 void dlog(String v) { Serial.printf("%s %s \n\r", getTime().c_str(), v.c_str()); }
 void dlog(char* v) { Serial.printf("%s %s \n\r", getTime().c_str(), v); }
 void dlog(int v) { Serial.printf("%s %i \n\r", getTime().c_str(), v); }

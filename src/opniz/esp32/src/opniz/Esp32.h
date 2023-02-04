@@ -54,12 +54,6 @@ namespace Opniz {
             String procedure(JsonArray params) override;
         };
         
-        class DacWriteHandler : public BaseHandler {
-        public:
-            String name() override { return "dacWrite"; };
-            String procedure(JsonArray params) override;
-        };
-        
         class DigitalReadHandler : public BaseHandler {
         public:
             String name() override { return "digitalRead"; };

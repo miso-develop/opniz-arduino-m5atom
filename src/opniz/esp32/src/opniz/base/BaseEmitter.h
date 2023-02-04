@@ -1,6 +1,7 @@
 #ifndef BASE_EMITTER_H
 #define BASE_EMITTER_H
 
+#include <vector>
 #include "./lib/JsonParser.h"
 
 class BaseEmitter {

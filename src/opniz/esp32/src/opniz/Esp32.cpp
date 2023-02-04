@@ -24,7 +24,6 @@ void Opniz::Esp32::_constructor() {
         new RestartHandler,
         new DelayHandler,
         new AnalogReadHandler,
-        new DacWriteHandler,
         new DigitalReadHandler,
         new DigitalWriteHandler,
         new LedcWriteHandler
@@ -64,14 +63,6 @@ String Opniz::Esp32::AnalogReadHandler::procedure(JsonArray params) {
     uint8_t pin = (uint8_t)params[0];
     pinMode(pin, INPUT);
     return (String)analogRead(pin);
-}
-
-String Opniz::Esp32::DacWriteHandler::procedure(JsonArray params) {
-    uint8_t pin = (uint8_t)params[0];
-    uint8_t value = (uint8_t)params[1];
-    pinMode(pin, OUTPUT);
-    dacWrite(pin, value);
-    return "true";
 }
 
 String Opniz::Esp32::DigitalReadHandler::procedure(JsonArray params) {
