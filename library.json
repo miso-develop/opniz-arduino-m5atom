@@ -1,6 +1,6 @@
 {
   "name": "opniz-m5atom",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "opniz Arduino library for M5ATOM",
   "keywords": "Opniz,ESP32,M5Stack",
   "license": "MIT",
@@ -18,7 +18,7 @@
   "dependencies": {
     "bblanchon/ArduinoJson": "^6.17.3",
     "links2004/WebSockets": "^2.3.6",
-    "m5stack/M5Atom": "^0.0.1",
+    "m5stack/M5Atom": "^0.1.0",
     "fastled/FastLED": "^3.4.0"
   },
   "export": {
