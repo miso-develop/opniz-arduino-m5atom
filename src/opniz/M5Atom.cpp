@@ -24,7 +24,9 @@ void Opniz::M5Atom::_constructor() {
         new _M5_dis_setBrightness___uint8_t___void_Handler,
         new _M5_dis_drawpix___uint8_t_uint8_t_CRGB___void_Handler,
         new _M5_dis_drawpix___uint8_t_CRGB___void_Handler,
+        new _M5_dis_fillpix___CRGB___void_Handler,
         new _M5_dis_clear______void_Handler,
+        new _M5_dis_setWidthHeight___uint16_t_uint16_t___void_Handler,
         new _M5_Btn_read______uint8_t_Handler,
         new _M5_Btn_isPressed______uint8_t_Handler,
         new _M5_Btn_isReleased______uint8_t_Handler,
@@ -62,6 +64,8 @@ String Opniz::M5Atom::_M5_update______void_Handler::procedure(JsonArray params) 
     return "true";
 }
 
+
+
 String Opniz::M5Atom::_M5_dis_setBrightness___uint8_t___void_Handler::procedure(JsonArray params) {
     uint8_t brightness = (uint8_t)params[0];
     M5.dis.setBrightness(brightness);
@@ -83,10 +87,25 @@ String Opniz::M5Atom::_M5_dis_drawpix___uint8_t_CRGB___void_Handler::procedure(J
     return "true";
 }
 
+String Opniz::M5Atom::_M5_dis_fillpix___CRGB___void_Handler::procedure(JsonArray params) {
+    CRGB Color = str2crgb(params[0]);
+    M5.dis.fillpix(Color);
+    return "true";
+}
+
 String Opniz::M5Atom::_M5_dis_clear______void_Handler::procedure(JsonArray params) {
     M5.dis.clear();
     return "true";
 }
+
+String Opniz::M5Atom::_M5_dis_setWidthHeight___uint16_t_uint16_t___void_Handler::procedure(JsonArray params) {
+    uint16_t xColumns = (uint16_t)params[0];
+    uint16_t yRows = (uint16_t)params[1];
+    M5.dis.setWidthHeight(xColumns, yRows);
+    return "true";
+}
+
+
 
 String Opniz::M5Atom::_M5_Btn_read______uint8_t_Handler::procedure(JsonArray params) {
     return (String)M5.Btn.read();

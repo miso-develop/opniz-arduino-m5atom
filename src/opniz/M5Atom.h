@@ -54,9 +54,21 @@ namespace Opniz { // MEMO: 本家M5Atomと名前衝突してしまったのでna
             String procedure(JsonArray params) override;
         };
 
+        class _M5_dis_fillpix___CRGB___void_Handler : public BaseHandler {
+        public:
+            String name() override { return "_M5.dis.fillpix(CRGB):void"; };
+            String procedure(JsonArray params) override;
+        };
+
         class _M5_dis_clear______void_Handler : public BaseHandler {
         public:
             String name() override { return "_M5.dis.clear():void"; };
+            String procedure(JsonArray params) override;
+        };
+
+        class _M5_dis_setWidthHeight___uint16_t_uint16_t___void_Handler : public BaseHandler {
+        public:
+            String name() override { return "_M5.dis.setWidthHeight(uint16_t,uint16_t):void"; };
             String procedure(JsonArray params) override;
         };
 
