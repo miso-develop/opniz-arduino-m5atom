@@ -4,24 +4,31 @@
 
 > ❗ このプロジェクトは現在アルファ版です。
 
-opnizとはM5StackといったESP32デバイスをNode.jsからobnizライクに遠隔制御するための、**Node.js SDK**および**Arduinoライブラリ**です。  
-しくみとしてはESP32デバイスおよびNode.js SDK間にて**JSON形式のRPCメッセージ**をやりとりし、相互に定義されたメソッドを呼び合います。  
+opnizとはM5StackといったESP32デバイスをNode.jsからobnizライクに遠隔制御するための、Node.js SDKおよびArduinoライブラリです。  
+しくみとしてはESP32デバイスおよびNode.js SDK間にてJSON形式のRPCメッセージをやりとりし、相互に定義されたメソッドを呼び合います。  
 
 ![overview](https://user-images.githubusercontent.com/22117028/150321859-5dde911d-91da-41f4-abee-3ad696905529.png)
 
-現在Node.js SDK、Arduinoライブラリともに**ESP32**および**M5ATOM**クラスを実装しています。  
-M5ATOMクラスで**M5Stack、M5StickC、M5ATOM Lite、M5ATOM Matrixでの動作を確認しています。**  
-
 新たなデバイスクラスや独自のメソッドを簡単に拡張できる設計となっています。  
-また[**クラウド環境（PaaS、FaaS等）でも動作**](#テスト用herokuサーバへの接続)させることができます。  
+また[クラウド環境（PaaS、FaaS等）でも動作](#テスト用herokuサーバへの接続)させることができます。  
 
 
 
 ## Arduinoライブラリ
 
-本リポジトリはM5ATOM向けArduinoライブラリのリポジトリとなります。  
+本リポジトリはM5ATOM向けのopniz Arduinoライブラリ リポジトリとなります。  
 Node.js SDKからのRPCリクエストを処理するハンドラと、ESP32デバイスからのRPCイベントを発火するエミッタを実装したデバイスクラスを提供します。  
 Arduino IDEおよびPlatformIOに対応しています。  
+
+
+
+## 対応デバイス
+
+* M5ATOM Matrix
+* M5ATOM Lite
+* M5ATOM Echo
+* M5ATOM U
+* その他ESP32、ESP32-PICO-D4、ESP32-S3デバイス
 
 
 
@@ -65,9 +72,7 @@ Arduinoのメニューより「スケッチ」→「ライブラリをインク�
 
 ### 依存ライブラリのインストール
 
-`ArduinoJson`ライブラリと`WebSockets`ライブラリのインストールが別途必要となります。  
-またM5ATOMを使用する場合は別途`M5Atom`、`FastLED`ライブラリのインストールも行ってください。  
-（M5Stack、M5StickCも`Opniz::M5Atom`クラスで動作しますが、各公式Arduinoライブラリに対応した専用ライブラリを用意する予定です）  
+[ArduinoJson](https://github.com/bblanchon/ArduinoJson)、[WebSockets](https://github.com/Links2004/arduinoWebSockets)、[M5Atom](https://github.com/m5stack/M5Atom)、[FastLED](https://github.com/FastLED/FastLED)ライブラリが別途必要となります。  
 
 
 
@@ -75,7 +80,6 @@ Arduinoのメニューより「スケッチ」→「ライブラリをインク�
 
 以下のコードは`Opniz::M5ATOM`クラスを使用した最小限のコードです。  
 Arduino IDEメニューの「スケッチ例」→「opniz」→「Basic」にあるコードと同等です。  
-（M5Stack、M5StickCも以下のコードで動作します）  
 
 opnizインスタンスの生成、Wi-Fi接続、Node.js SDKへの接続、そして`loop`関数内の`opniz->loop()`にてNode.js SDKからのRPCリクエストの待ち受け・ハンドリングと、デバイスへ実装されているRPCイベントの発火を行っています。  
 
@@ -99,42 +103,16 @@ Opniz::M5Atom* opniz = new Opniz::M5Atom(address, port); // opnizインスタン
 
 void setup() {
     initM5(); // M5ATOM初期化
+    
+    wifiConnector.setTimeoutCallback([]() { esp_restart(); }); // WiFi接続タイムアウト時にリブート
     wifiConnector.connect(); // WiFi接続
-    opniz->connect();        // Node.js SDKへ接続
+    
+    Serial.printf("opniz server address: %s\nopniz server port: %u\n\n", opniz->getAddress(), opniz->getPort()); // Node.js SDK接続情報を表示
+    opniz->connect(); // Node.js SDKへ接続
 }
 
 void loop() {
-    opniz->loop();         // opnizメインループ
-    wifiConnector.watch(); // WiFi接続監視
-}
-```
-
-### テスト用Herokuサーバへの接続
-
-opniz Node.js SDK (WebSocket Server)をHerokuへデプロイしています。  
-Arduino IDEメニューより「スケッチ例」→「opniz」→「Heroku」にあるコードの`ssid`、`password`をそれぞれ書き換えM5ATOMデバイスへ書き込んでみてください。  
-
-正常にWi-Fi接続されていればLEDが1秒おきにランダムな色で点灯します。  
-このようにクラウド環境にデプロイしたopniz Node.js SDKからでもopniz Arduinoライブラリを書き込んだM5ATOMデバイスを制御することができます。  
-
-```cpp
-#include <OpnizM5Atom.h>
-#include <lib/WiFiConnector.h>
-
-const char* ssid = "<SSID>";         // WiFiのSSIDに書き換え
-const char* password = "<PASSWORD>"; // WiFiのパスワードに書き換え
-
-WiFiConnector wifiConnector(ssid, password); // WiFi接続ヘルパーインスタンス生成
-Opniz::M5Atom* opniz = new Opniz::M5Atom("glacial-caverns-42373.herokuapp.com", 80); // opnizインスタンス生成（テスト用Herokuサーバへ接続）
-
-void setup() {
-    initM5(); // M5ATOM初期化
-    wifiConnector.connect(); // WiFi接続
-    opniz->connect();        // Node.js SDKへ接続
-}
-
-void loop() {
-    opniz->loop();         // opnizメインループ
+    opniz->loop(); // opnizメインループ
     wifiConnector.watch(); // WiFi接続監視
 }
 ```
@@ -143,6 +121,7 @@ void loop() {
 
 実装を追加して独自に拡張できます。  
 ハンドラやエミッタの追加は[`examples/AddHandler/AddHandler.ino`](./examples/AddHandler/AddHandler.ino)（以下のコード）が参考になると思います。  
+このコードではEsp32クラスをもとにM5ATOMのLED制御ハンドラーとボタンイベントエミッターを拡張し追加しています。  
 
 ```cpp
 #include <OpnizM5Atom.h>
@@ -155,7 +134,7 @@ WiFiConnector wifiConnector(ssid, password); // WiFi接続ヘルパーインス�
 
 const char* address = "192.168.0.1"; // Node.js SDKを実行する端末のIPアドレスを指定
 const uint16_t port = 3000;          // Node.js SDKを実行する端末のポート番号を指定
-Opniz::Esp32* opniz = new Opniz::Esp32(address, port); // opnizインスタンス生成
+Opniz::Esp32* opniz = new Opniz::Esp32(address, port); // M5AtomクラスではなくEsp32クラスでopnizインスタンス生成
 
 
 
@@ -188,23 +167,21 @@ public:
 
 
 void setup() {
-    // M5ATOM初期化
-    M5.begin(true, false, true);
-    M5.dis.setBrightness(10);
+    M5.begin(true, false, true); // M5ATOM初期化
+    M5.dis.setBrightness(10); // LED輝度調整
     
-    // WiFi接続
-    wifiConnector.connect();
+    wifiConnector.setTimeoutCallback([]() { esp_restart(); }); // WiFi接続タイムアウト時にリブート
+    wifiConnector.connect(); // WiFi接続
     
-    // 独自ハンドラ/エミッタを登録
-    opniz->addHandler({ new DrawpixHandler });
-    opniz->addEmitter({ new ButtonEmitter });
+    opniz->addHandler({ new DrawpixHandler }); // 独自ハンドラーを登録
+    opniz->addEmitter({ new ButtonEmitter }); // 独自エミッターを登録
     
-    // Node.js SDKへ接続
-    opniz->connect();
+    Serial.printf("opniz server address: %s\nopniz server port: %u\n\n", opniz->getAddress(), opniz->getPort()); // Node.js SDK接続情報を表示
+    opniz->connect(); // Node.js SDKへ接続
 }
 
 void loop() {
-    opniz->loop();         // opnizメインループ
+    opniz->loop(); // opnizメインループ
     wifiConnector.watch(); // WiFi接続監視
 }
 ```
@@ -239,6 +216,8 @@ opniz Node.js SDKでは以下の通信プロトコルを実装しています。
 
 * [opniz SDK for Node.js](https://github.com/miso-develop/opniz-sdk-nodejs)
 	* opnizデバイスをNode.jsから遠隔制御するためのSDK
+* [opniz Arduino Library for M5Unified](https://github.com/miso-develop/opniz-arduino-m5unified)
+	* M5Unified向けArduinoライブラリ
 * [opniz Arduino Library for ESP32](https://github.com/miso-develop/opniz-arduino-esp32)
 	* ESP32向けArduinoライブラリ
 * [opniz CLI](https://github.com/miso-develop/opniz-cli)
