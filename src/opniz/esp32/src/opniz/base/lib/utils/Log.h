@@ -1,5 +1,5 @@
-#ifndef LOG_H
-#define LOG_H
+#ifndef OPNIZ_LOG_H
+#define OPNIZ_LOG_H
 
 #include "./getTime.h"
 

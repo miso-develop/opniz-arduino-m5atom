@@ -25,7 +25,7 @@ void BaseTransport::receive() {
 };
 
 boolean BaseTransport::isConnected() {
-    _transport->isConnected();
+    return _transport->isConnected();
 }
 
 void BaseTransport::keepAlive() {

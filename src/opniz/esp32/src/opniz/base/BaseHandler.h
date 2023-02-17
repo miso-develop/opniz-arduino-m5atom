@@ -1,5 +1,5 @@
-#ifndef BASE_HANDLER_H
-#define BASE_HANDLER_H
+#ifndef OPNIZ_BASE_HANDLER_H
+#define OPNIZ_BASE_HANDLER_H
 
 #include <ArduinoJson.h>
 

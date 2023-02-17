@@ -1,5 +1,5 @@
-#ifndef TRANSPORT_CREATOR_H
-#define TRANSPORT_CREATOR_H
+#ifndef OPNIZ_TRANSPORT_CREATOR_H
+#define OPNIZ_TRANSPORT_CREATOR_H
 
 #include "./Transport.h"
 #include "./TcpTransport.h"

@@ -1,5 +1,5 @@
-#ifndef TRANSPORT_H
-#define TRANSPORT_H
+#ifndef OPNIZ_TRANSPORT_H
+#define OPNIZ_TRANSPORT_H
 
 #include "Arduino.h"
 #include <memory>
@@ -16,6 +16,9 @@ public:
     virtual ~Transport() = default;
     
     void init(std::function<String(String)> rpcHandlerFunction) { _rpcHandlerFunction = rpcHandlerFunction; };
+    
+    const char* getAddress() { return _address; };
+    const uint16_t getPort() { return _port; };
     
     virtual void connect() = 0;
     virtual void close() = 0;

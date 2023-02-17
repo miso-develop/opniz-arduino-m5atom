@@ -1,5 +1,5 @@
-#ifndef JSON_PARSER_H
-#define JSON_PARSER_H
+#ifndef OPNIZ_JSON_PARSER_H
+#define OPNIZ_JSON_PARSER_H
 
 #include <ArduinoJson.h>
 

@@ -1,5 +1,5 @@
-#ifndef TCP_TRANSPORT_H
-#define TCP_TRANSPORT_H
+#ifndef OPNIZ_TCP_TRANSPORT_H
+#define OPNIZ_TCP_TRANSPORT_H
 
 #include <WiFi.h>
 

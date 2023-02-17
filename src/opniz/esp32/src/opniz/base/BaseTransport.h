@@ -1,5 +1,5 @@
-#ifndef BASE_TRANSPORT_H
-#define BASE_TRANSPORT_H
+#ifndef OPNIZ_BASE_TRANSPORT_H
+#define OPNIZ_BASE_TRANSPORT_H
 
 #include "./transports/Transport.h"
 #include "./transports/TransportCreator.h"

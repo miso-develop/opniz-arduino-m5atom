@@ -1,5 +1,5 @@
-#ifndef BASE_DEVICE_H
-#define BASE_DEVICE_H
+#ifndef OPNIZ_BASE_DEVICE_H
+#define OPNIZ_BASE_DEVICE_H
 
 #include <unordered_map>
 

@@ -19,7 +19,7 @@ void WebSocketTransport::close() {
 boolean WebSocketTransport::send(const String rpcRequests) {
     if (!_socketIO.isConnected()) return false;
     
-    jdlog("send", rpcRequests); // DEBUG:
+    // jdlog("send", rpcRequests); // DEBUG:
     
     // MEMO: 先頭に付与した`0`はackのダミーID。これがあることでNode.js側のon("request")がcallback付きでもエラーにならなくなる。
     // MEMO: 基本的にNode.js側からの値を受けてデバイスでなにかすることはない想定なので、ひとまずデバイス側のcallback実装はなしでいく。

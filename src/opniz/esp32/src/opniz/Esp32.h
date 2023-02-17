@@ -1,5 +1,5 @@
-#ifndef ESP32_H
-#define ESP32_H
+#ifndef OPNIZ_ESP32_H
+#define OPNIZ_ESP32_H
 
 #include <Arduino.h>
 
@@ -11,6 +11,7 @@ namespace Opniz {
     class Esp32 : public BaseDevice {
     private:
         void _constructor();
+        
     public:
         Esp32(const char* address, const uint16_t port);
         Esp32(const char* address, const uint16_t port, const String id);
@@ -18,73 +19,19 @@ namespace Opniz {
         Esp32(const char* address, const uint16_t port, const String id, const Protocol protocol);
         ~Esp32() {};
         
-        class _getDeviceName______String_Handler : public BaseHandler {
-        public:
-            String name() override { return "_getDeviceName():String"; };
-            String procedure(JsonArray params) override;
-        };
+        class _getVersion______String_Handler : public BaseHandler { public: String name() override { return "_getVersion(void):String"; }; String procedure(JsonArray params) override; };
         
-        class GetFreeHeapHandler : public BaseHandler {
-        public:
-            String name() override { return "getFreeHeap"; };
-            String procedure(JsonArray params) override;
-        };
-        
-        class TemperatureReadHandler : public BaseHandler {
-        public:
-            String name() override { return "temperatureRead"; };
-            String procedure(JsonArray params) override;
-        };
-        
-        class RestartHandler : public BaseHandler {
-        public:
-            String name() override { return "restart"; };
-            String procedure(JsonArray params) override;
-        };
-        
-        class DelayHandler : public BaseHandler {
-        public:
-            String name() override { return "delay"; };
-            String procedure(JsonArray params) override;
-        };
-        
-        class AnalogReadHandler : public BaseHandler {
-        public:
-            String name() override { return "analogRead"; };
-            String procedure(JsonArray params) override;
-        };
-        
-        class DigitalReadHandler : public BaseHandler {
-        public:
-            String name() override { return "digitalRead"; };
-            String procedure(JsonArray params) override;
-        };
-        
-        class DigitalWriteHandler : public BaseHandler {
-        public:
-            String name() override { return "digitalWrite"; };
-            String procedure(JsonArray params) override;
-        };
-        
-        class LedcWriteHandler : public BaseHandler {
-        public:
-            String name() override { return "ledcWrite"; };
-            String procedure(JsonArray params) override;
-        };
-        
-        class PinModeHandler : public BaseHandler {
-        public:
-            String name() override { return "pinMode"; };
-            String procedure(JsonArray params) override;
-        };
-        
-        
-        
-        class RebootWhenHeapEmitter : public BaseEmitter {
-        public:
-            boolean canEmit() override;
-            String emit() override;
-        };
+        class _esp_get_minimum_free_heap_size___void___uint32_t_Handler : public BaseHandler { public: String name() override { return "_esp_get_minimum_free_heap_size(void):uint32_t"; }; String procedure(JsonArray params) override; };
+        class _temperatureRead______float_Handler : public BaseHandler { public: String name() override { return "_temperatureRead():float"; }; String procedure(JsonArray params) override; };
+        class _esp_restart___void___void_Handler : public BaseHandler { public: String name() override { return "_esp_restart(void):void"; }; String procedure(JsonArray params) override; };
+        class _delay___uint32_t___void_Handler : public BaseHandler { public: String name() override { return "_delay(uint32_t):void"; }; String procedure(JsonArray params) override; };
+        class _analogRead___uint8_t___uint16_t_Handler : public BaseHandler { public: String name() override { return "_analogRead(uint8_t):uint16_t"; }; String procedure(JsonArray params) override; };
+        class _digitalRead___uint8_t___int_Handler : public BaseHandler { public: String name() override { return "_digitalRead(uint8_t):int"; }; String procedure(JsonArray params) override; };
+        class _digitalWrite___uint8_t_uint8_t___void_Handler : public BaseHandler { public: String name() override { return "_digitalWrite(uint8_t,uint8_t):void"; }; String procedure(JsonArray params) override; };
+        class _ledcWrite___uint8_t_uint32_t___void_Handler : public BaseHandler { public: String name() override { return "_ledcWrite(uint8_t,uint32_t):void"; }; String procedure(JsonArray params) override; };
+        class _pinMode___uint8_t_uint8_t___void_Handler : public BaseHandler { public: String name() override { return "_pinMode(uint8_t,uint8_t):void"; }; String procedure(JsonArray params) override; };
+        class _ledcSetup___uint8_t_uint32_t_uint8_t___uint32_t_Handler : public BaseHandler { public: String name() override { return "_ledcSetup(uint8_t,uint32_t,uint8_t):uint32_t"; }; String procedure(JsonArray params) override; };
+        class _ledcAttachPin___uint8_t_uint8_t___void_Handler : public BaseHandler { public: String name() override { return "_ledcAttachPin(uint8_t,uint8_t):void"; }; String procedure(JsonArray params) override; };
     };
 }
 

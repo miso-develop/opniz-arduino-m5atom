@@ -1,37 +1,33 @@
 #include "./WiFiConnector.h"
 
-WiFiConnector::WiFiConnector(const char* ssid, const char* password) {
-    _ssid = ssid;
-    _password = password;
-}
+WiFiConnector::WiFiConnector(const char* ssid, const char* password) : _ssid(ssid), _password(password){}
 
 WiFiConnector::~WiFiConnector() {
     disconnect();
 }
 
-void WiFiConnector::connect() {
-    connect(_timeoutCallback, _connectingSignal);
+bool WiFiConnector::connect() {
+    return connect(_timeoutCallback, _connectingSignal);
 }
-void WiFiConnector::connect(std::function<void()> timeoutCallback) {
-    connect(timeoutCallback, _connectingSignal);
+bool WiFiConnector::connect(std::function<void()> timeoutCallback) {
+    return connect(timeoutCallback, _connectingSignal);
 }
-void WiFiConnector::connect(std::function<void(boolean)> connectingSignal) {
-    connect(_timeoutCallback, connectingSignal);
+bool WiFiConnector::connect(std::function<void(boolean)> connectingSignal) {
+    return connect(_timeoutCallback, connectingSignal);
 }
-void WiFiConnector::connect(std::function<void()> timeoutCallback, std::function<void(boolean)> connectingSignal) {
-    if (isConnected()) return;
+bool WiFiConnector::connect(std::function<void()> timeoutCallback, std::function<void(boolean)> connectingSignal) {
+    if (isConnected()) return true;
     
     WiFi.mode(WIFI_STA);
     WiFi.begin(_ssid, _password);
     Serial.print("WiFi connecting");
     
-    // connecting
     uint32_t _startTime = millis();
     while (!isConnected()) {
         if((millis() - _startTime) > _timeout) {
             _startTime = millis();
             timeoutCallback();
-            return;
+            return false;
         }
         
         _connectingSignalState = !_connectingSignalState;
@@ -42,38 +38,28 @@ void WiFiConnector::connect(std::function<void()> timeoutCallback, std::function
     }
     
     connectingSignal(false);
-    Serial.print("\nWiFi connected: ");
-    Serial.println(WiFi.localIP());
-    Serial.println();
+    Serial.println("\nWiFi connected!");
+    Serial.printf("SSID: %s\nIP: %s\n\n", _ssid, WiFi.localIP().toString());
+    return true;
 }
 
-void WiFiConnector::disconnect() {
-    if (!isConnected()) return;
+bool WiFiConnector::disconnect() {
+    if (!isConnected()) return true;
     
-    // タイムアウトチェック
+    Serial.print("WiFi disconnecting");
+    
+    uint32_t _startTime = millis();
     while (!WiFi.disconnect(true)) {
-        if((millis() - _startTime) > _timeout) esp_restart();
+        if((millis() - _startTime) > _timeout) {
+            _startTime = millis();
+            return false;
+        }
         
         Serial.print(".");
         delay(250);
     }
     
     Serial.println("WiFi disconnected!");
+    return true;
 }
 
-void WiFiConnector::reconnect() {
-    disconnect();
-    connect();
-}
-
-bool WiFiConnector::isConnected() {
-    return WiFi.status() == WL_CONNECTED;
-}
-
-void WiFiConnector::keepAlive() {
-    connect();
-}
-
-void WiFiConnector::watch() {
-    connect();
-}

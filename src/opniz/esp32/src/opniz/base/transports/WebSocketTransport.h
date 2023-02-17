@@ -1,5 +1,5 @@
-#ifndef WEBSOCKET_TRANSPORT_H
-#define WEBSOCKET_TRANSPORT_H
+#ifndef OPNIZ_WEBSOCKET_TRANSPORT_H
+#define OPNIZ_WEBSOCKET_TRANSPORT_H
 
 #include <WebSocketsClient.h>
 #include <SocketIOclient.h>
