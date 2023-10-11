@@ -2,15 +2,15 @@
 
 <div align="center"><img src="https://user-images.githubusercontent.com/22117028/150321839-e1e73dcb-d4b6-4bac-92b9-b1501ff3b092.png" alt="logo"></div>
 
-> ❗ このプロジェクトは現在アルファ版です。
+> **❗ このライブラリの使用は非推奨です！**  
+> **❗ [opniz Arduino Library for M5Unified](https://github.com/miso-develop/opniz-arduino-m5unified)をご使用ください！**  
 
-opnizとはM5StackといったESP32デバイスをNode.jsからobnizライクに遠隔制御するための、Node.js SDKおよびArduinoライブラリです。  
-しくみとしてはESP32デバイスおよびNode.js SDK間にてJSON形式のRPCメッセージをやりとりし、相互に定義されたメソッドを呼び合います。  
+opnizとはM5StackデバイスをNode.js（JavaScript / TypeScript）からobnizライクに実装できるオープンソースフレームワークです。  
+Node.js SDKおよびArduinoライブラリがあり、WebSocketで相互通信を行います。  
 
-![overview](https://user-images.githubusercontent.com/22117028/150321859-5dde911d-91da-41f4-abee-3ad696905529.png)
+しくみとしてはM5StackデバイスおよびNode.js SDK間にてJSON形式のRPCメッセージをやりとりし、相互に定義されたメソッドを呼び合います。  
 
-新たなデバイスクラスや独自のメソッドを簡単に拡張できる設計となっています。  
-また[クラウド環境（PaaS、FaaS等）でも動作](#テスト用herokuサーバへの接続)させることができます。  
+![overview](https://user-images.githubusercontent.com/22117028/274111780-1f1e22ec-66ac-4cd0-bee3-1a19ee2eb65c.png)
 
 
 
